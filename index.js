@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const { Pool } = require('pg');
 require('dotenv').config();
@@ -14,6 +15,15 @@ const pool = new Pool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
 });
+
+// Configuración de CORS
+const corsOptions = {
+    origin: 'https://render-ui-j09i.onrender.com', // Reemplaza con la URL de tu frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type']
+};
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
